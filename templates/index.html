@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Engine</title>
+    <link href="../static/style.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+    <div id="mainframe">
+        <label style="margin: 10px 0;font-size: x-large; color: #37474F">The Search Engine</label>
+        <div id="searchFrame">
+            <input type="text" id="searchInput" placeholder="Search">
+            <input type="button" id="submit" onclick="search()" value="Go" >
+            <label id="searching" style="visibility: hidden">Searching...</label>
+            <div id="results">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script src="../static/script.js" ></script>

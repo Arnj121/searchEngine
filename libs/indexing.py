@@ -40,7 +40,7 @@ def preproc_stage_1(reads):
     l = []
     for i in d:
         if i.isalnum():
-            print(43,i)
+            print('lammetizing word' ,i)
             while i.endswith((',', '.', ';', '?', ')', ']', '}', ':', "\"", "'")):
                 i = i[:-1]
             if i.endswith(("'s", "'t")):
@@ -56,7 +56,8 @@ def preproc_stage_1(reads):
                 l.append(i)
 
         elif '-' in i:
-                for j in i.split('-'):
+            print('lammetizing word', i)
+            for j in i.split('-'):
                     l.append(j)
     return ' '.join(l)
 

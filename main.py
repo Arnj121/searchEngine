@@ -26,7 +26,6 @@ def crawl(url, d):
         c=[]
         for i in content:
             if len(i.strip())>0:
-                print(28,i.strip())
                 originaldata.append(i.strip())
                 c.append(preproc_stage_2(preproc_stage_1(i)))
         for i in c:
@@ -34,7 +33,7 @@ def crawl(url, d):
             lotsofdata.append(i)
     try:
         links = get_links(url)
-        print(url, links)
+        print(url)
         for link in links:
             crawl(link, d - 1)
     except AttributeError:
@@ -92,16 +91,20 @@ def search(q):
     print(dic)
     return dic
 
-crawler('https://www.bbc.com/', 2)
-indexer()
-i = input('>> ')
-while i !='q':
-    if i == 'save':
+inp = input('>> ')
+while inp !='quit':
+    if inp == 'start':
+        print('starting')
+        crawler('https://www.bbc.com/', 2)
+        indexer()
+    elif inp == 'save':
         saveData()
-    elif i == 'load':
+        print('saved')
+    elif inp == 'load':
+        print('loaded')
         loadData()
     else:
-        print('error')
-    i = input('>> ')
+        print('unknown command')
+    inp = input('>> ')
 # saveLoad()
 # search('vegetarian recipe burst flavour plus information substitution and food')

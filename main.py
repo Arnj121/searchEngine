@@ -1,6 +1,7 @@
 import re
 from libs.search import *
 from libs.indexing import *
+from libs.saveLoad import *
 from bs4 import BeautifulSoup
 import requests
 lotsofdata = []
@@ -71,8 +72,16 @@ def indexer():
     df, uniquewords=update_freq(df,uniquewords,lotsofdata)
     df =cosine_similarity(df,lotsofdata)
     print(df)
-def saveLoad():
-    pass
+def saveData():
+    save_table(df,'/data/data.csv')
+    save_documents(originaldata,'/data/docs.txt')
+    save_words(uniquewords,'/data/words.txt')
+
+def loadData():
+    global df,uniquewords,originaldata,linker
+    df=load_table('/data/data.csv')
+    originaldata,linker = load_documents('/data/docs.txt')
+    uniquewords = load_words('/data/words.txt')
 
 def search(q):
     l = query_tester(preproc_stage_2(preproc_stage_1(q)),lotsofdata,linker,uniquewords,df)
@@ -85,5 +94,14 @@ def search(q):
 
 crawler('https://www.bbc.com/', 2)
 indexer()
+i = input('>> ')
+while i !='q':
+    if i == 'save':
+        saveData()
+    elif i == 'load':
+        loadData()
+    else:
+        print('error')
+    i = input('>> ')
 # saveLoad()
 # search('vegetarian recipe burst flavour plus information substitution and food')

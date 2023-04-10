@@ -108,12 +108,15 @@ def saveData():
 def loadData():
     global df,uniquewords,originaldata,linker
     df=load_table('data/data.csv')
-    originaldata,linker = load_documents('data/docs.txt')
     uniquewords = load_words('data/words.txt')
-
+    originaldata,linker = load_documents('data/docs.txt')
+    print(df.describe())
+    print('unique words retrieved ', len(uniquewords))
+    print('number of links ', len(linker))
+    print('number of documents ',len(originaldata))
 def search(q):
-    l = query_tester(preproc_stage_2(preproc_stage_1(q)),lotsofdata,linker,uniquewords,df)
-    ranks = ranker(l[1],linker,originaldata)
+    l = query_tester(preproc_stage_2(preproc_stage_1(q)),originaldata,linker,uniquewords,df)
+    ranks = ranker(l,linker,originaldata)
     dic ={}
     for i in range(len(ranks)):
         dic[i] = ranks[i]
@@ -127,11 +130,13 @@ while inp !='quit':
         crawl()
         indexer()
     elif inp == 'save':
+        print('saving...')
         saveData()
         print('saved')
     elif inp == 'load':
-        print('loaded')
+        print('loading...')
         loadData()
+        print('loaded')
     elif inp =='robot':
         processRobots()
     else:

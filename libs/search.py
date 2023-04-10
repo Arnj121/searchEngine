@@ -9,9 +9,7 @@ def check_dict(query,uniquewords):
     return l
 
 def query_tester(query,lotsofdata,linker,uniquewords,df):
-    q = preproc_stage_1(query)
-    q = preproc_stage_2(q)
-    q = q.split(' ')
+    q = query.split(' ')
     q = check_dict(q,uniquewords)
     q.sort()
     print(q)
@@ -26,7 +24,7 @@ def query_tester(query,lotsofdata,linker,uniquewords,df):
     for i in range(len(lotsofdata)):
         s = np.dot(df.iloc[i], dfq.iloc[0])
         result.append(s)
-    return [linker[result.index(max(result))], result]
+    return result
 
 
 def ranker(results, links,lotsofdata):

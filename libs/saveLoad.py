@@ -6,14 +6,14 @@ def load_table(path):
     return df
 
 def load_documents(path):
-    docs=[],links=[]
+    docs=[]
+    links=[]
     data = open(path, 'r')
     temp = data.read().split('\n')
     temp2 = []
     for i in temp:
         temp2.append(i.split('||'))
     for i in temp2:
-        # print(i)
         docs.append(i[0])
         links.append(i[1])
     return [docs,links]

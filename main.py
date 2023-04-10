@@ -1,6 +1,4 @@
 import re
-import xml
-
 from libs.search import *
 from libs.indexing import *
 from libs.saveLoad import *
@@ -36,6 +34,7 @@ def processRobots():
         if i.startswith('https'):
             print('processing ', i)
             parseXML(i)
+
 def parseXML(arg):
     req = requests.get(arg).content
     xmltext = ET.fromstring(req)
@@ -102,15 +101,15 @@ def indexer():
     df =cosine_similarity(df,lotsofdata)
     print(df)
 def saveData():
-    save_table(df,'/data/data.csv')
-    save_documents(originaldata,'/data/docs.txt')
-    save_words(uniquewords,'/data/words.txt')
+    save_table(df,'data/data.csv')
+    save_documents(originaldata,'data/docs.txt',linker)
+    save_words(uniquewords,'data/words.txt')
 
 def loadData():
     global df,uniquewords,originaldata,linker
-    df=load_table('/data/data.csv')
-    originaldata,linker = load_documents('/data/docs.txt')
-    uniquewords = load_words('/data/words.txt')
+    df=load_table('data/data.csv')
+    originaldata,linker = load_documents('data/docs.txt')
+    uniquewords = load_words('data/words.txt')
 
 def search(q):
     l = query_tester(preproc_stage_2(preproc_stage_1(q)),lotsofdata,linker,uniquewords,df)

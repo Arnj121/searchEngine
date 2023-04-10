@@ -8,8 +8,12 @@ nltk.download('averaged_perceptron_tagger')
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import wordnet
 
-stopWords = ['i', 'a', 'about', 'an', 'are', 'as', 'at', 'be', 'by', 'for', 'from', 'how', 'in', 'is', 'it', 'of', 'on',
-             'or', 'that', 'the', 'this', 'to', 'was', 'what', 'when', 'where', 'who', 'will', 'with', 'the', 'www']
+stopWords = ['i', 'a','actually','almost','also','although', 'always', 'about', 'an', 'are', 'as', 'at', 'be', 'by', 'for', 'from', 'how', 'in', 'is',
+             'it', 'of', 'on','or', 'that', 'the', 'this', 'to', 'was', 'what', 'when', 'where', 'who', 'will', 'with', 'the', 'www','and','am','any',
+             'become','became','but','by','can','could','did','do','does','each','either','else','for','from','had','has','have','hence','how','if',
+             'just','may','maybe','me','might','mine','must','my','neither','nor','not','oh','ok','whereas','wherever','whenever','whether','which',
+             'while','whom','whoever','whose','why','within','would','yes','yet','you','your']
+
 lemmatizer = WordNetLemmatizer()
 def pos_tagger(nltk_tag):
     if nltk_tag.startswith('J'):
@@ -39,7 +43,15 @@ def preproc_stage_1(reads):
     d = reads.strip().lower().split()
     l = []
     for i in d:
-        if i.isalnum():
+        p=''
+        for j in i:
+            if ord(j) < 128:
+                p+=j
+            else:
+                p=''
+                break
+        i=p
+        if len(i)>0 and i.isalnum():
             print('lammetizing word' ,i)
             while i.endswith((',', '.', ';', '?', ')', ']', '}', ':', "\"", "'")):
                 i = i[:-1]

@@ -26,13 +26,28 @@ def load_words(path):
 def save_table(df, path):
     df.to_csv(path)
 
-def save_documents(data,path):
+def save_documents(data,path,linker):
     temp = []
     for i in range(len(data)):
-        temp.append(data[i] + '||' + linker[i])
+        p=''
+        for j in data[i]:
+            if ord(j)<128:
+                p+=j
+        temp.append(p + '||' + linker[i])
     with open(path, 'w') as f:
         f.write('\n'.join(temp))
 
 def save_words(data,path):
     with open(path, 'w') as f:
-        f.write(','.join(data))
+        temp=[]
+        for i in data:
+            p=''
+            for j in i:
+                if ord(j)<128:
+                    p+=j
+                else:
+                    p=''
+                    break
+            if len(p)>0:
+                temp.append(p)
+        f.write(','.join(temp))

@@ -46,6 +46,7 @@ async function search(){
     const timest = performance.now()
     const res = await fetch(`http://127.0.0.1:5000/search?q=${document.getElementById('searchInput').value}`)
     const v = await res.json()
+    console.log(v)
     tot=Object.keys(v).length
     await Filter(v)
     const timeend = performance.now()

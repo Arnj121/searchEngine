@@ -14,8 +14,9 @@ def load_documents(path):
     for i in temp:
         temp2.append(i.split('||'))
     for i in temp2:
-        docs.append(i[0])
-        links.append(i[1])
+        if len(i) == 2:
+            docs.append(i[0])
+            links.append(i[1])
     return [docs,links]
 
 def load_words(path):

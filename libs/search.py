@@ -14,12 +14,11 @@ def query_tester(query,lotsofdata,linker,uniquewords,df):
     q.sort()
     print(q)
     dfq = pd.DataFrame(np.array([np.array([0] * len(uniquewords))]), columns=uniquewords)
-    print(dfq)
     for w in q:
         dfq.loc[0, w] = q.count(w)
-    print(df.iloc[len(lotsofdata) + 1], len(dfq.iloc[0]))
     dfq.iloc[0] = df.iloc[len(lotsofdata) + 1] * dfq.iloc[0]
     dfq.iloc[0] = dfq.iloc[0] / np.sqrt(sum(dfq.iloc[0] ** 2))
+    print(dfq)
     result = []
     for i in range(len(lotsofdata)):
         s = np.dot(df.iloc[i], dfq.iloc[0])

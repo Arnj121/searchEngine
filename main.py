@@ -110,7 +110,7 @@ def loadData():
     df=load_table('data/data.csv')
     uniquewords = load_words('data/words.txt')
     originaldata,linker = load_documents('data/docs.txt')
-    print(df.describe())
+    print(len(df['12']))
     print('unique words retrieved ', len(uniquewords))
     print('number of links ', len(linker))
     print('number of documents ',len(originaldata))

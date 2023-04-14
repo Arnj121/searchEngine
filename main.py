@@ -1,13 +1,13 @@
-import re
 from libs.search import *
 from libs.indexing import *
 from libs.saveLoad import *
 from bs4 import BeautifulSoup
 import xml.etree.ElementTree as ET
 import requests
-lotsofdata = []
+processedData = []
 originaldata=[]
 linker = []
+dataWPara={}
 queue=[]
 uniquewords = []
 df = []
@@ -58,13 +58,14 @@ def crawl():
         if len(content) > 0:
             c=[]
             originaldata.append(content[0].strip())
+            dataWPara[i] = content[1:]
             for j in content:
                 print('processing document ', j)
                 if len(j.strip())>0:
                     c.append(preproc_stage_2(preproc_stage_1(j)))
             c=' '.join(c)
             print('final result ',c)
-            lotsofdata.append(c)
+            processedData.append(c)
             linker.append(i)
 # def get_links(url):
 #     response = requests.get(url)
@@ -90,31 +91,32 @@ def get_content(url):
 
 
 # def crawler(weblink,depth):
-#     global lotsofdata,linker
+#     global processedData,linker
 #     crawl(weblink, depth)
-#     print(len(lotsofdata),len(linker))
+#     print(len(processedData),len(linker))
 
 def indexer():
     global df,uniquewords
-    df,uniquewords=generate_table(lotsofdata)
+    df,uniquewords=generate_table(processedData)
     print(len(uniquewords))
-    df, uniquewords=update_freq(df,uniquewords,lotsofdata)
-    df =cosine_similarity(df,lotsofdata)
+    df, uniquewords=update_freq(df,uniquewords,processedData)
+    df =cosine_similarity(df,processedData)
     print(df)
 def saveData():
     save_table(df,'data/data.csv')
-    save_documents(originaldata,'data/docs.txt',linker)
+    save_documents(originaldata,dataWPara,'data/docs.txt',linker)
     save_words(uniquewords,'data/words.txt')
 
 def loadData():
-    global df,uniquewords,originaldata,linker
+    global df,uniquewords,originaldata,linker, dataWPara
     df=load_table('data/data.csv')
     uniquewords = load_words('data/words.txt')
-    originaldata,linker = load_documents('data/docs.txt')
+    originaldata,linker,dataWPara = load_documents('data/docs.txt')
     print(len(df['12']))
     print('unique words retrieved ', len(uniquewords))
     print('number of links ', len(linker))
     print('number of documents ',len(originaldata))
+
 def search(q):
     l = query_tester(preproc_stage_2(preproc_stage_1(q)),originaldata,linker,uniquewords,df)
     ranks = ranker(l,linker,originaldata)

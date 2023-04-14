@@ -79,6 +79,7 @@ function displayPage(pageNo){
         content.style.color='#37474F'
         content.href=v[i][1]
         content.innerText=v[i][2].substr(0,100)
+        content.style.overflowWrap='break-word'
         content.target = '_blank'
         content.style.textDecoration='none'
         lnk.style.color='#FF3D00'

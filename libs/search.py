@@ -26,7 +26,7 @@ def query_tester(query,lotsofdata,linker,uniquewords,df):
     return result
 
 
-def ranker(results, links,lotsofdata):
+def ranker(results,links,lotsofdata):
     dic=[]
     for i in range(len(results)):
         if pd.isna(results[i]):

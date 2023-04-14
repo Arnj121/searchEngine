@@ -50,10 +50,6 @@ def parseXML(arg):
 def crawl():
     processRobots()
     print(len(queue),queue)
-    # if d == 0:
-    #     return
-    # if url in linker:
-    #     return
     cc=0
     for i in queue:
         cc+=1
@@ -61,14 +57,15 @@ def crawl():
         content = get_content(i)
         if len(content) > 0:
             c=[]
+            originaldata.append(content[0].strip())
             for j in content:
                 print('processing document ', j)
                 if len(j.strip())>0:
-                    originaldata.append(j.strip())
                     c.append(preproc_stage_2(preproc_stage_1(j)))
-            for j in c:
-                lotsofdata.append(j)
-                linker.append(i)
+            c=' '.join(c)
+            print('final result ',c)
+            lotsofdata.append(c)
+            linker.append(i)
 # def get_links(url):
 #     response = requests.get(url)
 #     soup = BeautifulSoup(response.text, 'lxml')
@@ -83,8 +80,12 @@ def get_content(url):
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'lxml')
     content = []
-    for h in soup.find_all(re.compile('h1')):
-        content.append(h.text)
+    h =soup.find_all('h1')
+    p =soup.find_all('p')
+    for i in h:
+        content.append(i.text)
+    for i in p:
+        content.append(i.text)
     return content
 
 

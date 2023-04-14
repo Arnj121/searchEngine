@@ -62,6 +62,7 @@ async function search(){
 function displayTime(){
     let cv = document.createElement('label')
     cv.style.borderRadius='50px'
+    cv.style.color='#F57F17'
     cv.style.border = '1px #90A4AE solid'
     cv.style.padding= '5px 10px'
     cv.innerText=`About ${tot} results (${time}s)`
@@ -73,17 +74,20 @@ function displayPage(pageNo){
     for( let i of Object.keys(v)){
         let div = document.createElement('div')
         div.className='searchClass'
-        let lnk = document.createElement('a')
-        let content = document.createElement('p')
-        // let match = document.createElement('label')
-        // match.style.alignSelf='flex-end'
-        lnk.href=v[i][1]
-        lnk.innerText=v[i][1]
-        lnk.target = '_blank'
-        content.innerText = v[i][2].substr(0,100)
-        content.style.lineBreak='anywhere'
+        let content = document.createElement('a')
+        let lnk = document.createElement('p')
+        content.style.color='#37474F'
+        content.href=v[i][1]
+        content.innerText=v[i][2].substr(0,100)
+        content.target = '_blank'
+        content.style.textDecoration='none'
+        lnk.style.color='#FF3D00'
+        lnk.style.textDecoration='underline'
+        lnk.style.fontSize='small'
+        lnk.innerText = v[i][1]
+        // content.style.lineBreak='anywhere'
         // match.innerText =`score - ${Math.round(v[i][0]*100)/100}`
-        div.append(lnk,content)
+        div.append(content,lnk)
         document.getElementById('results').appendChild(div)
     }
 }

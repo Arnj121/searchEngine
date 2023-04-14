@@ -1,5 +1,5 @@
 #Sitemap: https://www.bbc.com/sitemaps/https-index-com-archive.xml
-Sitemap: https://www.bbc.com/sitemaps/https-index-com-news.xml
+#Sitemap: https://www.bbc.com/sitemaps/https-index-com-news.xml
 #Sitemap: https://www.bbc.com/sitemaps/https-index-com-archive_video.xml
 #Sitemap: https://www.bbc.com/sitemaps/https-index-com-video.xml
 #Sitemap: https://www.bbc.com/sitemaps/sitemap-com-ws-topics.xml

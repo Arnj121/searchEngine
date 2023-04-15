@@ -8,9 +8,9 @@ nltk.download('averaged_perceptron_tagger')
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import wordnet
 
-stopWords = ['i', 'a','actually','almost','also','although', 'always', 'about', 'an', 'are', 'as', 'at', 'be', 'by', 'for', 'from', 'how', 'in', 'is',
+stopWords = ['i', 'a','actually','almost','also','although', 'do','always', 'about', 'an', 'are', 'as', 'at', 'be', 'by', 'for', 'from', 'how', 'in', 'is',
              'it', 'of', 'on','or', 'that', 'the', 'this', 'to', 'was', 'what', 'when', 'where', 'who', 'will', 'with', 'the', 'www','and','am','any',
-             'become','became','but','by','can','could','did','do','does','each','either','else','for','from','had','has','have','hence','how','if',
+             'become','became','but','by','can','could','did','he','she','him','his','mr','ms','our','she','so','too','us','do','does','each','either','else','for','from','had','has','have','hence','how','if',
              'just','may','maybe','me','might','mine','must','my','neither','nor','not','oh','ok','whereas','wherever','whenever','whether','which',
              'while','whom','whoever','whose','why','within','would','yes','yet','you','your']
 
@@ -89,8 +89,10 @@ def generate_table(data):
 
 def update_freq(df, terms, lotsofdata):
     print(terms)
+    cc=1
     for w in terms:
-        print('currently proccessing word', w)
+        print('currently proccessing word (',cc,' / ',len(terms),')', w)
+        cc+=1
         for d in range(len(lotsofdata)):
             df.loc[d, w] = lotsofdata[d].count(w)
         docf = len(df[w]) - list(df[w]).count(0)

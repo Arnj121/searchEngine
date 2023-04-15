@@ -51,9 +51,9 @@ def crawl():
     processRobots()
     print(len(queue),queue)
     cc=0
-    for i in queue:
+    for i in queue[:100]:
         cc+=1
-        print('getting link '+str(cc)+'/'+str(len(queue))+' ', i)
+        print('getting link '+str(cc)+'/'+str(len(queue[:100]))+' ', i)
         content = get_content(i)
         if len(content) > 0:
             c=[]
@@ -86,7 +86,8 @@ def get_content(url):
     for i in h:
         content.append(i.text)
     for i in p:
-        content.append(i.text)
+        if not i.text.lower().startswith('last updated'):
+            content.append(i.text)
     return content
 
 

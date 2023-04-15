@@ -40,7 +40,7 @@ def save_documents(data,datap,path,linker):
         for k in datap[linker[i]]:
             t = ''
             for n in k:
-                if ord(n)<128:
+                if ord(n)<128 and ord(n)!=10:
                     t+=n
             if len(t)>0:
                 d.append(t)

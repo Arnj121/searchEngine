@@ -5,12 +5,11 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/data.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/docs.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/docs.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/robots.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/robots.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/words.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/words.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/indexing.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/indexing.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/libs/saveLoad.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/saveLoad.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/search.py" beforeDir="false" afterPath="$PROJECT_DIR$/libs/search.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,7 +126,7 @@
       <workItem from="1680790157155" duration="14667000" />
       <workItem from="1681060174264" duration="10348000" />
       <workItem from="1681073627076" duration="18183000" />
-      <workItem from="1681504650851" duration="2263000" />
+      <workItem from="1681504650851" duration="6216000" />
     </task>
     <servers />
   </component>

@@ -31,7 +31,7 @@ def get_links(url):
     for link in soup.find_all('a'):
         href = link.get('href')
         try:
-            if href.startswith('/'):
+            if href.startswith('/') and href not in dontVisit:
                 links.append('https://www.bbc.com/'+href)
         except AttributeError:
             pass
@@ -160,7 +160,8 @@ while inp !='quit':
     if inp == 'start':
         print('starting')
         # crawl()
-        niche_crawl('https://bbc.com/sport', 2)
+        processRobots()
+        niche_crawl('https://bbc.com/sport', 1)
         crawl()
         indexer()
     elif inp == 'save':

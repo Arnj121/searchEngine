@@ -122,7 +122,7 @@
       <workItem from="1681504650851" duration="6923000" />
       <workItem from="1681674858061" duration="2000" />
       <workItem from="1681930719557" duration="5801000" />
-      <workItem from="1682267372266" duration="6433000" />
+      <workItem from="1682267372266" duration="7815000" />
     </task>
     <task id="LOCAL-00001" summary="kjdg">
       <created>1681581546621</created>
@@ -152,17 +152,6 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="kjdg" />
     <option name="LAST_COMMIT_MESSAGE" value="kjdg" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>68</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/searchEngine$searchEngine.coverage" NAME="searchEngine Coverage Results" MODIFIED="1681061229606" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />

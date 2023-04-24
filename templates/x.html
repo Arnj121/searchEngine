@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Engine</title>
+    <link href="../static/style.css" type="text/css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Amatic SC' rel='stylesheet'>
+</head>
+<body style="background-image: url('/static/ku.png');">
+    <div id="mainframe">
+        <label style="margin: 50px 0 0 0;font-size: xxx-large; color: whitesmoke; font-family: 'Amatic SC'">Search Todays Sports News</label>
+        <div id="searchFrame">
+            <input type="text" id="searchInput" placeholder="Search">
+            <input type="button" id="submit" onclick="search()" value="Go" >
+            <label id="searching" style="visibility: hidden; color: whitesmoke">Searching</label>
+            <div id="results">
+                <input type ="button" onclick="relv()" value="relevant">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script src="../static/script.js" ></script>

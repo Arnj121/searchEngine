@@ -50,40 +50,19 @@ def niche_crawl(url, depth):
         niche_crawl(link, depth-1)
 
 def processRobots():
-    with open('data/robots.txt','r') as f:
-        data=f.read()
-        data = data.split('\n')
-        for i in data:
-                if len(i)>0:
-                    j=i.split(' ')
-                    if j[0].startswith('Disallow'):
-                        dontVisit.append(j[1])
-                    elif j[0].startswith('Sitemap'):
-                        robots.append(j[1])
-    for i in robots:
-        if i.startswith('https'):
-            print('processing ', i)
-            parseXML(i)
-
-def parseXML(arg):
-    req = requests.get(arg).content
-    xmltext = ET.fromstring(req)
-    for j in xmltext.iter():
-        text = j.text
-        try:
-            if text.startswith('https') and text.endswith('.xml'):
-                parseXML(j.text)
-            elif text.startswith('https://www.bbc.com/news') or text.startswith('https://www.bbc.com/sport'):
-                urlsfrontier.append(j.text)
-        except AttributeError:
-            pass
+    robot = requests.get("https://www.bbc.com/robots.txt")
+    sou = BeautifulSoup(robot.text, "lxml")
+    #print(type(sou.text))
+    for line in sou.text.split('\n'):
+         if line.startswith("Disallow"):
+            dontVisit.append(line.split()[1])
+ 
 def crawl():
-    # processRobots()
     print(len(urlsfrontier),urlsfrontier)
     cc=0
     for i in urlsfrontier:
         cc+=1
-        print('getting link '+str(cc)+'/'+str(len(urlsfrontier[:100]))+' ', i)
+        print('getting link '+str(cc)+'/'+str(len(urlsfrontier))+' ', i)
         content = get_content(i)
         if len(content) > 0:
             c=[]
@@ -149,10 +128,9 @@ def search(q):
     return dic
 
 inp = input('>> ')
-while inp !='quit':
+while inp !='launch':
     if inp == 'start':
         print('starting')
-        # crawl()
         p = time.time()
         processRobots()
         niche_crawl('https://bbc.com/sport', 1)

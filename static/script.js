@@ -24,18 +24,14 @@ function watcher(){
         document.getElementById('searching').style.visibility='hidden'
     }
 }
-var pages={0:{},1:{}}
+var pages={0:{}}
 var currentPage=0
 function Filter(data){
     let cp=0,cn=0;
     for(let i of Object.keys(data)){
         if (parseFloat(data[i][0]) > 0) {
             pages[0][cp] = data[i]
-            cp+=1
-        }
-        else {
-            pages[1][cn] = data[i]
-            cn+=1
+            cp += 1
         }
     }
 }
@@ -52,7 +48,7 @@ async function search(){
     const timeend = performance.now()
     time=Math.round((timeend-timest)*1000)/1000000
     document.getElementById('results').innerText=''
-    showPageNo()
+    // showPageNo()
     displayTime()
     displayPage(0)
     searching=0
@@ -76,7 +72,11 @@ function displayPage(pageNo){
         div.className='searchClass'
         let content = document.createElement('a')
         let lnk = document.createElement('p')
-        content.style.color='#37474F'
+        let cos = document.createElement('label')
+        let perc=v[i][0]*100
+        cos.innerText='match score = '+ String(perc).slice(0,5) + '%'
+        cos.style.color='whitesmoke'
+        content.style.color='whitesmoke'
         content.href=v[i][1]
         content.innerText=v[i][2].substr(0,100)
         content.style.overflowWrap='break-word'
@@ -88,7 +88,7 @@ function displayPage(pageNo){
         lnk.innerText = v[i][1]
         // content.style.lineBreak='anywhere'
         // match.innerText =`score - ${Math.round(v[i][0]*100)/100}`
-        div.append(content,lnk)
+        div.append(content,lnk,cos)
         document.getElementById('results').appendChild(div)
     }
 }

@@ -1,5 +1,6 @@
 from libs.search import *
 from libs.indexing import *
+import time
 from libs.saveLoad import *
 from bs4 import BeautifulSoup
 import xml.etree.ElementTree as ET
@@ -160,10 +161,12 @@ while inp !='quit':
     if inp == 'start':
         print('starting')
         # crawl()
+        p = time.time()
         processRobots()
         niche_crawl('https://bbc.com/sport', 1)
         crawl()
         indexer()
+        print('total execution time ', str(time.time()-p))
     elif inp == 'save':
         print('saving...')
         saveData()

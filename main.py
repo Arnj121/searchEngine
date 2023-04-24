@@ -4,15 +4,16 @@ from libs.saveLoad import *
 from bs4 import BeautifulSoup
 import xml.etree.ElementTree as ET
 import requests
+import time
+
 processedData = []
 originaldata=[]
 linker = []
 dataWPara={}
-queue=[]
+urlsfrontier=[]
 uniquewords = []
 df = []
 robots=[]
-filterURLs=['https://www.bbc.com/future','https://www.bbc.com/travel','https://www.bbc.com/worklife','https://www.bbc.com/reel','https://www.bbc.com/news']
 dontVisit=[]
 #Document processing and indexing
 #vector space model
@@ -43,8 +44,8 @@ def niche_crawl(url, depth):
     links = get_links(url)
     for link in links:
         print('getting links ',link)
-        if link not in queue and links not in filterURLs:
-            queue.append(link)
+        if link not in urlsfrontier:
+            urlsfrontier.append(link)
         niche_crawl(link, depth-1)
 
 def processRobots():
@@ -72,16 +73,16 @@ def parseXML(arg):
             if text.startswith('https') and text.endswith('.xml'):
                 parseXML(j.text)
             elif text.startswith('https://www.bbc.com/news') or text.startswith('https://www.bbc.com/sport'):
-                queue.append(j.text)
+                urlsfrontier.append(j.text)
         except AttributeError:
             pass
 def crawl():
     # processRobots()
-    print(len(queue),queue)
+    print(len(urlsfrontier),urlsfrontier)
     cc=0
-    for i in queue[:100]:
+    for i in urlsfrontier:
         cc+=1
-        print('getting link '+str(cc)+'/'+str(len(queue[:100]))+' ', i)
+        print('getting link '+str(cc)+'/'+str(len(urlsfrontier[:100]))+' ', i)
         content = get_content(i)
         if len(content) > 0:
             c=[]
@@ -95,15 +96,6 @@ def crawl():
             print('final result ',c)
             processedData.append(c)
             linker.append(i)
-# def get_links(url):
-#     response = requests.get(url)
-#     soup = BeautifulSoup(response.text, 'lxml')
-#     links = []
-#     for link in soup.find_all('a'):
-#         href = link.get('href')
-#         if href.startswith('http'):
-#             links.append(href)
-#     return links
 
 def get_content(url):
     response = requests.get(url)
@@ -129,7 +121,7 @@ def indexer():
     df,uniquewords=generate_table(processedData)
     print(len(uniquewords))
     df, uniquewords=update_freq(df,uniquewords,processedData)
-    df =cosine_similarity(df,processedData)
+    df =vectorspace(df,processedData)
     print(df)
 def saveData():
     save_table(df,'data/data.csv')

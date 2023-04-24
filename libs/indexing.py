@@ -101,7 +101,7 @@ def update_freq(df, terms, lotsofdata):
         df.loc[len(lotsofdata) + 1, w] = idf
     return [df,terms]
 
-def cosine_similarity(df,lotsofdata):
+def vectorspace(df,lotsofdata):
     for i in range(len(lotsofdata)):
         print('currently processing document ', i)
         df.iloc[i] = df.iloc[i] * df.iloc[len(lotsofdata) + 1]

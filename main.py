@@ -12,12 +12,40 @@ queue=[]
 uniquewords = []
 df = []
 robots=[]
+filterURLs=['https://www.bbc.com/future','https://www.bbc.com/travel','https://www.bbc.com/worklife','https://www.bbc.com/reel','https://www.bbc.com/news']
 dontVisit=[]
 #Document processing and indexing
 #vector space model
 #niche crawler
 #query interface
 #term proximity scoring
+
+import requests
+from bs4 import BeautifulSoup
+
+def get_links(url):
+    response = requests.get(url)
+    #print(response.text)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    links = []
+    for link in soup.find_all('a'):
+        href = link.get('href')
+        try:
+            if href.startswith('/'):
+                links.append('https://www.bbc.com/'+href)
+        except AttributeError:
+            pass
+    return links
+
+def niche_crawl(url, depth):
+    if depth == 0:
+        return
+    links = get_links(url)
+    for link in links:
+        print('getting links ',link)
+        if link not in queue and links not in filterURLs:
+            queue.append(link)
+        niche_crawl(link, depth-1)
 
 def processRobots():
     with open('data/robots.txt','r') as f:
@@ -48,7 +76,7 @@ def parseXML(arg):
         except AttributeError:
             pass
 def crawl():
-    processRobots()
+    # processRobots()
     print(len(queue),queue)
     cc=0
     for i in queue[:100]:
@@ -131,6 +159,8 @@ inp = input('>> ')
 while inp !='quit':
     if inp == 'start':
         print('starting')
+        # crawl()
+        niche_crawl('https://bbc.com/sport', 2)
         crawl()
         indexer()
     elif inp == 'save':

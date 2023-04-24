@@ -43,8 +43,8 @@ async function search(){
     const res = await fetch(`http://127.0.0.1:5000/search?q=${document.getElementById('searchInput').value}`)
     const v = await res.json()
     console.log(v)
-    tot=Object.keys(v).length
     await Filter(v)
+    tot=Object.keys(pages[0]).length
     const timeend = performance.now()
     time=Math.round((timeend-timest)*1000)/1000000
     document.getElementById('results').innerText=''

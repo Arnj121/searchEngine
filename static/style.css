@@ -1,9 +1,8 @@
-.body {
-    background-image: url("/static/ku.png"); /* The image used */
-    height: 500px; /* You must set a specified height */
+body { /* The image used */
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Do not repeat the image */
     background-size: cover; /* Resize the background image to cover the entire container */
+    background-attachment: fixed;
 }
 #mainframe{
     position: relative;
